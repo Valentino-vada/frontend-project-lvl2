@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Valentino-vada/frontend-project-lvl2/issues"
   },
-  "homepage": "https://github.com/Valentino-vada/frontend-project-lvl2#readme"
+  "homepage": "https://github.com/Valentino-vada/frontend-project-lvl2#readme",
+  "type": "module",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "dependencies": {
+    "commander": "^8.0.0"
+  }
 }
