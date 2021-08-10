@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { readFileSync } from 'fs';
