@@ -1,15 +1,29 @@
-import _ from 'lodash';
 import fs from 'fs';
-import path from 'path';
+import _ from 'lodash';
 
-const genDiff = (filepath1, filepath2) => {
-  // const pathAbs1 = path.resolve(filepath1);
-  // const pathAbs2 = path.resolve(filepath2);
-  const content1 = fs.readFileSync(filepath1, 'utf8');
-  const content2 = fs.readFileSync(filepath2, 'utf8');
-  const obj = { ...content1, ...content2 };
-  return console.log(obj);
+const genDiff = (pathFile1, pathFile2) => {
+  const file1 = fs.readFileSync(pathFile1, 'utf8');
+  const file2 = fs.readFileSync(pathFile2, 'utf8');
+  const file1Data = JSON.parse(file1);
+  const file2Data = JSON.parse(file2);
+  
+  const allKeysData = { ...file1Data, ...file2Data };
+
+  const compareKeys = (acc, value, key) => {
+    if (_.has(file1Data, key) && _.has(file2Data, key)) {
+      return file1Data[key] === file2Data[key]
+      ? [...acc, `   ${key}: ${value}`]
+      : [...acc, ` + ${key}: ${file2Data[key]}`, ` - ${key}: ${file1Data[key]}`];
+    }
+    if (!_.has(file1Data, key) && _.has(file2Data, key)) {
+      return [...acc, ` + ${key}: ${value}`];
+    }
+    return [...acc, ` - ${key}: ${value}`];
+  };
+
+  const diffCollection = _.reduce(allKeysData, compareKeys, '');
+  const diffString = `{\n${diffCollection.join('\n')}\n}`;
+  return diffString;
 };
-// 'src/file1.json', 'src./file2.json'
-const a = genDiff('file1.json', 'file2.json');
+
 export default genDiff;
