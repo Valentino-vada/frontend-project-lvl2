@@ -4,7 +4,10 @@
   "description": "[![Actions Status](https://github.com/Valentino-vada/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/Valentino-vada/frontend-project-lvl2/actions)",
   "main": "src/index.js",
   "scripts": {
-    "test": "npx jest --bail"
+    "test": "npx jest --bail",
+    "win-test": "node --experimental-vm-modules node_modules/jest/bin/jest --bail",
+    "lint": "npx eslint .",
+    "lint-fix": "npx eslint --fix ."
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,11 @@
   },
   "homepage": "https://github.com/Valentino-vada/frontend-project-lvl2#readme",
   "type": "module",
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "testRunner": "jest-circus/runner"
+  },
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
