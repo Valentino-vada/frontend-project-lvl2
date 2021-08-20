@@ -1,29 +1,27 @@
-import fs from 'fs';
 import _ from 'lodash';
+import getFilesData from './parse.js';
 
 const genDiff = (pathFile1, pathFile2) => {
-  const file1 = fs.readFileSync(pathFile1, 'utf8');
-  const file2 = fs.readFileSync(pathFile2, 'utf8');
-  const file1Data = JSON.parse(file1);
-  const file2Data = JSON.parse(file2);
+  const filesData = getFilesData(pathFile1, pathFile2);
 
-  const keysData = { ...file1Data, ...file2Data };
-
-  const compareKeys = (acc, value, key) => {
-    if (_.has(file1Data, key) && _.has(file2Data, key)) {
-      return file1Data[key] === file2Data[key]
-        ? [...acc, `   ${key}: ${value}`]
-        : [...acc, ` + ${key}: ${file2Data[key]}`, ` - ${key}: ${file1Data[key]}`];
+  const keys = Object.keys(filesData[0]).concat(Object.keys(filesData[1]));
+  const sortedKeys = _.uniq(keys).sort((key1, key2) => key1.localeCompare(key2));
+  const result = [];
+  sortedKeys.forEach((key) => {
+    if (_.has(filesData[0], key) && _.has(filesData[1], key)) {
+      if (filesData[0][key] === filesData[1][key]) {
+        result.push(`  ${key}: ${filesData[0][key]}`);
+      } else {
+        result.push(`- ${key}: ${filesData[0][key]}`);
+        result.push(`+ ${key}: ${filesData[1][key]}`);
+      }
+    } else if (_.has(filesData[0], key) && !_.has(filesData[1], key)) {
+      result.push(`- ${key}: ${filesData[0][key]}`);
+    } else if (!_.has(filesData[0], key) && _.has(filesData[1], key)) {
+      result.push(`+ ${key}: ${filesData[1][key]}`);
     }
-    if (!_.has(file1Data, key) && _.has(file2Data, key)) {
-      return [...acc, ` + ${key}: ${value}`];
-    }
-    return [...acc, ` - ${key}: ${value}`];
-  };
-
-  const diffCollection = _.reduce(keysData, compareKeys, '');
-  const diffString = `{\n${diffCollection.join('\n')}\n}`;
-  return diffString;
+  });
+  return `{\n  ${result.join('\n  ')}\n}`;
 };
 
 export default genDiff;
