@@ -7,7 +7,9 @@ const getFilesData = (pathFile1, pathFile2) => {
 
   const fileData1 = readFileSync(absolutePath1, 'utf8');
   const fileData2 = readFileSync(absolutePath2, 'utf8');
-  return [JSON.parse(fileData1), JSON.parse(fileData2)];
+  const parseData1 = JSON.parse(fileData1);
+  const parseData2 = JSON.parse(fileData2);
+  return [parseData1, parseData2];
 };
 
 export default getFilesData;
