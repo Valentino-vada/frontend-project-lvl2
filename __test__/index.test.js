@@ -20,3 +20,17 @@ const pathFileYml2 = getFixturePath('file2.yml');
 test('Comparison of flat yml files', () => {
   expect(genDiff(pathFileYml1, pathFileYml2)).toBe(expectedYml);
 });
+
+const expectedBigJson = readFileSync(getFixturePath('expectedBigJson.txt'), 'utf8');
+const pathFileJson3 = getFixturePath('file3.json');
+const pathFileJson4 = getFixturePath('file4.json');
+test('Comparison of flat bigJson files', () => {
+  expect(genDiff(pathFileJson3, pathFileJson4)).toBe(expectedBigJson);
+});
+
+const expectedBigYaml = readFileSync(getFixturePath('expectedBigYaml.txt'), 'utf8');
+const pathFileYaml3 = getFixturePath('file3.yaml');
+const pathFileYaml4 = getFixturePath('file4.yaml');
+test('Comparison of flat BigYaml files', () => {
+  expect(genDiff(pathFileYaml3, pathFileYaml4)).toBe(expectedBigYaml);
+});
