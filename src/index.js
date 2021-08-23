@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import getFilesData from './parser';
+import getFilesParsers from './parsers';
 
 const genDiff = (pathFile1, pathFile2) => {
-  const filesData = getFilesData(pathFile1, pathFile2);
+  const filesData = [getFilesParsers(pathFile1), getFilesParsers(pathFile2)];
 
   const keys = Object.keys(filesData[0]).concat(Object.keys(filesData[1]));
   const sortedKeys = _.uniq(keys).sort((key1, key2) => key1.localeCompare(key2));
