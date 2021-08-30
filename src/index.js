@@ -1,27 +1,13 @@
-import _ from 'lodash';
-import getFilesParsers from './parsers';
+import buildingAst from './building.js';
+import parsers from './parsers.js';
+import makeFormatter from './formatters/index.js';
 
-const genDiff = (pathFile1, pathFile2) => {
-  const filesData = [getFilesParsers(pathFile1), getFilesParsers(pathFile2)];
-
-  const keys = Object.keys(filesData[0]).concat(Object.keys(filesData[1]));
-  const sortedKeys = _.uniq(keys).sort((key1, key2) => key1.localeCompare(key2));
-  const result = [];
-  sortedKeys.forEach((key) => {
-    if (_.has(filesData[0], key) && _.has(filesData[1], key)) {
-      if (filesData[0][key] === filesData[1][key]) {
-        result.push(`  ${key}: ${filesData[0][key]}`);
-      } else {
-        result.push(`- ${key}: ${filesData[0][key]}`);
-        result.push(`+ ${key}: ${filesData[1][key]}`);
-      }
-    } else if (_.has(filesData[0], key) && !_.has(filesData[1], key)) {
-      result.push(`- ${key}: ${filesData[0][key]}`);
-    } else if (!_.has(filesData[0], key) && _.has(filesData[1], key)) {
-      result.push(`+ ${key}: ${filesData[1][key]}`);
-    }
-  });
-  return `{\n  ${result.join('\n  ')}\n}`;
+const genDiff = (filepath1, filepath2, format) => {
+  const diff = buildingAst(parsers(filepath1), parsers(filepath2));
+  if (format) {
+    return makeFormatter(format)(diff);
+  }
+  return makeFormatter()(diff);
 };
 
 export default genDiff;
