@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 
-const getFilesParsers = (pathFile) => {
+const parsers = (pathFile) => {
   const absolutePath = path.resolve(pathFile);
   const format = path.extname(pathFile);
 
@@ -16,4 +16,4 @@ const getFilesParsers = (pathFile) => {
   return null;
 };
 
-export default getFilesParsers;
+export default parsers;
