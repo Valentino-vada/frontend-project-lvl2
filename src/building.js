@@ -1,6 +1,6 @@
 // import _ from 'lodash';
 import boolObj from './booldata.js';
-import getDataObj from './datacheck.js';
+import getDataObj from './dataObj.js';
 
 const buildingAst = (obj1, obj2) => {
   const keys = Object.keys({ ...obj1, ...obj2 })
