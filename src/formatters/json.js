@@ -1,4 +1,4 @@
-import getDataObj from '../datacheck.js';
+import getDataObj from '../dataObj.js';
 
 const formatDistanceKeys = (obj) => {
   const result = Object.keys(obj)
