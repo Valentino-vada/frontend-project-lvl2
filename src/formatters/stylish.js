@@ -1,4 +1,4 @@
-import getDataObj from '../datacheck.js';
+import getDataObj from '../dataObj.js';
 
 const stylish = (obj, depth = 2) => {
   const keys = Object.keys(obj);
