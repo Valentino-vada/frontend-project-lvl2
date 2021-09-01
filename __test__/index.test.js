@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import path, { dirname, format } from 'path';
 import { readFileSync } from 'fs';
 import genDiff from '../src/index.js';
 
@@ -42,5 +42,5 @@ test('Comparison of flat json with plain files', () => {
 
 const expectedBigJsonPlain = readFileSync(getFixturePath('expectedBigJsonPlain.txt'), 'utf8');
 test('Comparison of flat json with JSON files', () => {
-  expect(genDiff(pathFileJson3, pathFileJson4, '.json')).toBe(expectedBigJsonPlain);
+  expect(genDiff(pathFileJson3, pathFileJson4, format)).toBe(expectedBigJsonPlain);
 });
