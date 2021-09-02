@@ -46,3 +46,4 @@ Run tests
 ```sh
 $ make test
 ```
+[![asciicast](https://asciinema.org/a/433743.svg)](https://asciinema.org/a/433743)
