@@ -46,7 +46,7 @@ Run tests
 ```sh
 $ make test
 ```
-## Examples:
+## Asciinema:
 [![asciicast](https://asciinema.org/a/433743.svg)](https://asciinema.org/a/433743)
 [![asciicast](https://asciinema.org/a/433754.svg)](https://asciinema.org/a/433754)
 [![asciicast](https://asciinema.org/a/433756.svg)](https://asciinema.org/a/433756)
