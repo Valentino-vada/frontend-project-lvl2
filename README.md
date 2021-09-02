@@ -37,13 +37,17 @@ Compare two files using other formats
 $ gendiff -f json file3.json file4.json
 ```
 ```sh
-$ gendiff -f plain file3.json file4.json
+$ gendiff -f yaml file3.yaml file4.yaml
 ```
 ```sh
-$ gendiff -f yaml file3.yaml file4.yaml
+$ gendiff -f plain file3.json file4.json
 ```
 Run tests
 ```sh
 $ make test
 ```
+## Examples:
 [![asciicast](https://asciinema.org/a/433743.svg)](https://asciinema.org/a/433743)
+[![asciicast](https://asciinema.org/a/433754.svg)](https://asciinema.org/a/433754)
+[![asciicast](https://asciinema.org/a/433756.svg)](https://asciinema.org/a/433756)
+[![asciicast](https://asciinema.org/a/433757.svg)](https://asciinema.org/a/433757)
