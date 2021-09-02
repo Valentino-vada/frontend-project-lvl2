@@ -9,29 +9,34 @@ Gendiff - program for calculating the differences between two tree files with ma
 
 ## Requirements:
 Used the version when developing v14.17.2 Node.js
+
 It is recommended to use a version not lower than v14.17.2 Node.js
 
 ## Installation:
 Just copy and run these commands in the terminal one by one
-
+```sh
 $ git clone git@github.com:Valentino-vada/frontend-project-lvl2.git
-
+```
+```sh
 $ make install
+```
 
 Get help information
-
+```sh
 $ gendiff -h
-
+```
 Compare two files
-
+```sh
 $ gendiff file1.json file2.json
-
+```
 Compare two files using other formats
-
+```sh
 $ gendiff -f json file3.json file4.json
-
+```
+```sh
 $ gendiff -f plain file3.json file4.json
-
+```
 Run tests
-
+```sh
 $ make test
+```
