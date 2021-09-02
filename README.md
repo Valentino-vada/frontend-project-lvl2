@@ -27,6 +27,9 @@ $ gendiff -h
 ```
 Compare two files
 ```sh
+$ cd __fixtures__
+```
+```sh
 $ gendiff file1.json file2.json
 ```
 Compare two files using other formats
@@ -35,6 +38,9 @@ $ gendiff -f json file3.json file4.json
 ```
 ```sh
 $ gendiff -f plain file3.json file4.json
+```
+```sh
+$ gendiff -f yaml file3.yaml file4.yaml
 ```
 Run tests
 ```sh
