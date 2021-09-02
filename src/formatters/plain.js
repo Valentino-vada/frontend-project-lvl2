@@ -12,28 +12,27 @@ const formatPlain = (obj, key) => {
 };
 
 const plain = (obj) => {
-  const result = [];
   const iter = (object, complexKey = '') => {
     const keys = Object.keys(object);
-    keys.forEach((key) => {
+    return keys.reduce((arrayAcc, key) => {
       const clearKey = key.substring(2);
-      const plusKey = `+ ${clearKey}`;
       const minusKey = `- ${clearKey}`;
+      const plusKey = `+ ${clearKey}`;
       const fullPath = `${complexKey}${clearKey}`;
-      const stringPhrase = `Property '${fullPath}' was`;
+      const stringStartPhrase = `Property '${fullPath}' was`;
       if (key.startsWith('  ') && getDataObj(object, key)) {
-        iter(object[key], `${fullPath}.`);
-      } else if (key.startsWith('- ') && keys.includes(plusKey)) {
-        result.push(`${stringPhrase} updated. From ${formatPlain(object, minusKey)} to ${formatPlain(object, plusKey)}`);
-      } else if (key.startsWith('- ') && !keys.includes(plusKey)) {
-        result.push(`${stringPhrase} removed`);
-      } else if (key.startsWith('+ ') && !keys.includes(minusKey)) {
-        result.push(`${stringPhrase} added with value: ${formatPlain(object, plusKey)}`);
+        return [...arrayAcc, iter(object[key], `${fullPath}.`)];
+      } if (key.startsWith('- ') && keys.includes(plusKey)) {
+        return [...arrayAcc, `${stringStartPhrase} updated. From ${formatPlain(object, minusKey)} to ${formatPlain(object, plusKey)}`];
+      } if (key.startsWith('- ') && !keys.includes(plusKey)) {
+        return [...arrayAcc, `${stringStartPhrase} removed`];
+      } if (key.startsWith('+ ') && !keys.includes(minusKey)) {
+        return [...arrayAcc, `${stringStartPhrase} added with value: ${formatPlain(object, plusKey)}`];
       }
-    });
+      return arrayAcc;
+    }, []);
   };
-  iter(obj);
-  return result.join('\n');
+  return iter(obj).flat(Infinity).join('\n');
 };
 
 export default plain;
