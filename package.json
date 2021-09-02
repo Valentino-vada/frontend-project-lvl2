@@ -21,9 +21,7 @@
   "homepage": "https://github.com/Valentino-vada/frontend-project-lvl2#readme",
   "type": "module",
   "jest": {
-    "testEnvironment": "node",
-    "transform": {},
-    "testRunner": "jest-circus/runner"
+    "testEnvironment": "node" 
   },
   "bin": {
     "gendiff": "bin/gendiff.js"
